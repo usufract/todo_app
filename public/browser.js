@@ -27,16 +27,18 @@ document.addEventListener("click", function(e) {
 document.addEventListener("click", function(e) {
   if(e.target.classList.contains("delete-me")) {
     /* Sending a post request to the server with the id of the item. */
-    axios.post("/delete", {
-      id: e.target.getAttribute("id")
-    })
-    /* Removing the item from the list. */
-    .then(function() {
-      e.target.parentElement.parentElement.remove();
-    })
-    /* A function that is called when the promise is rejected. */
-    .catch(function() {
-      console.log("Please try again later.");
-    });
+    if (confirm("Are you sure you want to delete")) {
+      axios.post("/delete", {
+        id: e.target.getAttribute("id")
+      })
+      /* Removing the item from the list. */
+      .then(function() {
+        e.target.parentElement.parentElement.remove();
+      })
+      /* A function that is called when the promise is rejected. */
+      .catch(function() {
+        console.log("Please try again later.");
+      });
+    }
   }
 });

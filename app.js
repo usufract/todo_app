@@ -101,12 +101,13 @@ app.get("/", function (req, res) {
 /* This is a POST request that is being sent to the server. The server is then sending the data to the
 database. */
 app.post("/create-item", function(req, res) {
-  let safeText = sanitizeHTML(req.body.text, 
-    { allowedTags: [],
-      allowedAttributes: {}
-    });
+/* Sanitizing the data that is being sent to the server. */
+  // let safeText = sanitizeHTML(req.body.text, 
+  //   { allowedTags: [],
+  //     allowedAttributes: {}
+  //   });
   console.log(req.body.item);
-  db.collection("items").insertOne({text:safeText});
+  db.collection("items").insertOne({text:req.body.item});
   // res.send("Success!");
   res.redirect("/");
 });
